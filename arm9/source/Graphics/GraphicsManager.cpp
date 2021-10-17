@@ -2,6 +2,48 @@
 
 GraphicsManager GraphicsManager::sGraphicsManager;
 
+int nextPBlock;
+
+//---------------------------------------------------------------------------------
+inline uint32 alignVal( uint32 val, uint32 to ) {
+	return (val & (to-1))? (val & ~(to-1)) + to : val;
+}
+
+//---------------------------------------------------------------------------------
+int getNextPaletteSlot(u16 count, uint8 format) {
+//---------------------------------------------------------------------------------
+	// ensure the result aligns on a palette block for this format
+	uint32 result = alignVal(nextPBlock, 1<<(4-(format==GL_RGB4)));
+
+	// convert count to bytes and align to next (smallest format) palette block
+	count = alignVal( count<<1, 1<<3 );
+
+	// ensure that end is within palette video mem
+	if( result+count > 0x10000 )   // VRAM_F - VRAM_E
+		return -1;
+
+	nextPBlock = result+count;
+	return (int)result;
+}
+
+//---------------------------------------------------------------------------------
+void glTexLoadPal(const u16* pal, u16 count, u32 addr) {
+//---------------------------------------------------------------------------------
+	vramSetBankE(VRAM_E_LCD);
+	swiCopy( pal, &VRAM_E[addr>>1] , count / 2 | COPY_MODE_WORD);
+	vramSetBankE(VRAM_E_TEX_PALETTE);
+}
+
+//---------------------------------------------------------------------------------
+int gluTexLoadPal(const u16* pal, u16 count, uint8 format) {
+//---------------------------------------------------------------------------------
+	int addr = getNextPaletteSlot(count, format);
+	if( addr>=0 )
+		glTexLoadPal(pal, count, (u32) addr);
+
+	return addr;
+}
+
 GraphicsManager::GraphicsManager()
 {
 	videoSetMode(MODE_5_3D);
@@ -200,7 +242,7 @@ void GraphicsManager::Draw(TextureType tex, s32 x, s32 y, u32 width, u32 height,
 		glBindTexture(0, textures[tex]);
 		
 		if (textureInfo[tex].palette >= 0)
-			glColorTable(textureInfo[tex].format, textureInfo[tex].palette);
+			GFX_PAL_FORMAT = textureInfo[tex].palette >> (4 - (textureInfo[tex].format == GL_RGB4));
 		
 		glBegin(GL_QUADS);
 			
