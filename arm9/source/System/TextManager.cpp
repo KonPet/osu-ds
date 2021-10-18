@@ -69,7 +69,7 @@ void TextManager::Clear()
 	gfxConsoleClear();
 }
 
-void TextManager::PrintLocate(int x, int y, DrawOrigin origin, char* format, ...)
+void TextManager::PrintLocate(int x, int y, DrawOrigin origin, const char* format, ...)
 {	
 	gfxConsoleSelect(mConsole);
 	

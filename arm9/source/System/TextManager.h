@@ -41,7 +41,7 @@ class TextManager
 		void Print(const char* format, ...);
 		void Clear();
 		
-		void PrintLocate(int x, int y, DrawOrigin origin, char* format, ...);
+		void PrintLocate(int x, int y, DrawOrigin origin, const char* format, ...);
 	
 	protected:
 		gfxPrintConsole* mConsole;
