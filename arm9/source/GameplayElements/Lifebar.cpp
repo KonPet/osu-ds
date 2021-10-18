@@ -34,7 +34,7 @@ void Lifebar::Initialize()
 	mFillRate = MAXHP/((mFillTime-700)/(float)1000*60);
 	
 	for (u32 time = BeatmapManager::Current().StartTime() - mFillTime;
-			time < BeatmapManager::Current().StartTime()-700; time += 150)
+			time < (u32)BeatmapManager::Current().StartTime()-700; time += 150)
 	{
 		mSprites[2]->Scale(time, time+90, 1.5, 1);
 	}

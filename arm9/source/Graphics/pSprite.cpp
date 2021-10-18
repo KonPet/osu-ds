@@ -78,8 +78,8 @@ bool pSprite::InBounds(s32 x, s32 y)
 	{
 		case ORIGIN_TOPLEFT:
 		{
-			return x >= X && x <= X+Width
-				&& y >= Y && y <= Y+Height;
+			return x >= X && x <= X+(s32)Width
+				&& y >= Y && y <= Y+(s32)Height;
 		}
 		
 		case ORIGIN_CENTER:
@@ -93,8 +93,8 @@ bool pSprite::InBounds(s32 x, s32 y)
 		
 		case ORIGIN_BOTTOMLEFT:
 		{
-			return x >= X && x <= X+Width
-				&& y >= Y-Height && y <= Y;
+			return x >= X && x <= X+(s32)Width
+				&& y >= Y-(s32)Height && y <= Y;
 		}
 		
 		default:

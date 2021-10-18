@@ -185,7 +185,7 @@ HitSlider::HitSlider(s32 x, s32 y, s32 time, u32 lengthtime, vector<HitObjectPoi
 			spr->Rotate(tAnimStart, tAnimEnd, tAngle, tAngle+3000);
 			spr->Scale(tAnimStart, tAnimEnd, 1, 0.9);
 			tAnimStart = tAnimEnd;
-		} while (tAnimStart < time+(lengthtime*i));
+		} while ((u32)tAnimStart < time+(lengthtime*i));
 		
 		spr->Kill(mEndTime);
 		mSprites.push_back(spr);
@@ -345,7 +345,7 @@ void HitSlider::Update()
 		//slider end
 		else if (fTouching && !fFinished && i == mTicksTarget-2) //again, try it on a piece of paper if you want to know why >.>
 		{
-			if (now >= mEndTime - DifficultyManager::GetHitWindow300()) //hack - seems like we're missing a frame somewhere >.>
+			if ((u32)now >= mEndTime - DifficultyManager::GetHitWindow300()) //hack - seems like we're missing a frame somewhere >.>
 			{
 				++mTicksHit;
 				
@@ -370,7 +370,7 @@ void HitSlider::Update()
 	}
 	
 	//reset ticks if ball goes to a repeat regardless of fTouching
-	if (now >= mTime + (mLengthTime * (mRepeatCurrent + 1)))
+	if ((u32)now >= mTime + (mLengthTime * (mRepeatCurrent + 1)))
 	{
 		for (u32 j=0; j<mTickCount; ++j)
 		{
@@ -430,7 +430,7 @@ void HitSlider::OnTouch(const touchPosition& touch)
 	s32 now = GameClock::Clock().Time();
 	u32 delta = MathHelper::Abs(mTime - now);
 	
-	if (InBounds(touch.px, touch.py) && now >= mTime && now <= mEndTime + DifficultyManager::GetHitWindow())
+	if (InBounds(touch.px, touch.py) && now >= mTime && (u32)now <= mEndTime + DifficultyManager::GetHitWindow())
 	{
 		//if we're touching it without tapping it, then we missed the slider start
 		if (delta < DifficultyManager::GetHitWindow() && !fStarted)

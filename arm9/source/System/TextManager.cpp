@@ -54,7 +54,7 @@ void TextManager::PrintFloat(char* format, ...)
 	va_end(args);
 }
 
-void TextManager::Print(char* format, ...)
+void TextManager::Print(const char* format, ...)
 {
 	gfxConsoleSelect(mConsole);
 	va_list args;
@@ -153,7 +153,7 @@ void TextManager::PrintLocate(int x, int y, DrawOrigin origin, char* format, ...
 	iprintf("\x1b[%iy", y);
 	
 	// dump information with x pos
-	for (int i=0; i<lines.size(); i++)
+	for (int i=0; i<(int)lines.size(); i++)
 		if (x > 0 && x + width < 640) 
 			iprintf("\x1b[%ix%s\n", x, lines[i]);
 }

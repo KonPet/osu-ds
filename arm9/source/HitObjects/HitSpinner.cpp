@@ -153,7 +153,7 @@ void HitSpinner::OnTouch(const touchPosition& touch)
 
 void HitSpinner::Hit()
 {
-	if (mRequiredSpins > 0 && (mTotalSpins == 0 || mTotalSpins < MathHelper::Max(0, (s32)(mRequiredSpins - 2))))
+	if (mRequiredSpins > 0 && (mTotalSpins == 0 || (s32)mTotalSpins < MathHelper::Max(0, (s32)(mRequiredSpins - 2))))
 	{
 		IncreaseScore(SCORE_MISS);
 	}
@@ -168,11 +168,11 @@ void HitSpinner::Hit()
 		{
 			IncreaseScore(SCORE_300);
 		}
-		else if (mTotalSpins == MathHelper::Max(0, (s32)(mRequiredSpins - 1)))
+		else if ((s32)mTotalSpins == MathHelper::Max(0, (s32)(mRequiredSpins - 1)))
 		{
 			IncreaseScore(SCORE_100);
 		}
-		else if (mTotalSpins == MathHelper::Max(0, (s32)(mRequiredSpins - 2)))
+		else if ((s32)mTotalSpins == MathHelper::Max(0, (s32)(mRequiredSpins - 2)))
 		{
 			IncreaseScore(SCORE_50, false, true); //score sprite doesn't show if you score 50 on spinners
 		}

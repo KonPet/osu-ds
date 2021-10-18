@@ -38,7 +38,7 @@ class TextManager
 		void SetFont(FONT font);
 		
 		void PrintFloat(char* format, ...);
-		void Print(char* format, ...);
+		void Print(const char* format, ...);
 		void Clear();
 		
 		void PrintLocate(int x, int y, DrawOrigin origin, char* format, ...);

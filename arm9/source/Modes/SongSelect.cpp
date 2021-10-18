@@ -102,7 +102,7 @@ void SongSelect::Update()
 			pSprite* spr = mSpriteManager.Sprites()[index];
 			
 			index += mColCurrent*2;
-			if (index >= BeatmapManager::SongCount())
+			if ((u32)index >= BeatmapManager::SongCount())
 				break;
 			Beatmap* map = BeatmapManager::Beatmaps()[index];
 			
