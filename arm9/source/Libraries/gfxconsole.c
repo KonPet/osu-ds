@@ -101,7 +101,7 @@ gfxPrintConsole* gfxcurrentConsole = &gfxcurrentCopy;
 
 gfxPrintConsole* gfxConsoleGetDefault(void){return &gfxdefaultConsole;}
 
-void gfxConsolePrintChar(char c);
+void gfxConsolePrintChar(char unsigned c);
 
 //---------------------------------------------------------------------------------
 static void gfxConsoleCls(char mode) {
@@ -197,7 +197,7 @@ static void gfxConsoleClearLine(char mode) {
 }
 
 //---------------------------------------------------------------------------------
-ssize_t gfxnocash_write(struct _reent *r, int fd, const char *ptr, size_t len) {
+ssize_t gfxnocash_write(struct _reent *r, void *fd, const char *ptr, size_t len) {
 	//---------------------------------------------------------------------------------
 	int count = 0;
 
@@ -217,7 +217,7 @@ ssize_t gfxnocash_write(struct _reent *r, int fd, const char *ptr, size_t len) {
 
 
 //---------------------------------------------------------------------------------
-ssize_t gfxcon_write(struct _reent *r,int fd,const char *ptr, size_t len) {
+ssize_t gfxcon_write(struct _reent *r,void *fd,const char *ptr, size_t len) {
 	//---------------------------------------------------------------------------------
 	
 	char chr;
@@ -653,7 +653,7 @@ static void gfxnewRow() {
 
 
 //---------------------------------------------------------------------------------
-void gfxConsolePrintChar( char c ) {
+void gfxConsolePrintChar( char unsigned c ) {
 	//---------------------------------------------------------------------------------
 
 	if(gfxcurrentConsole->PrintChar) 

@@ -1,6 +1,6 @@
 #include <nds.h>
 #include <stdio.h>
-#include "Libraries/nitrofs.h"
+#include <filesystem.h>
 #include "Helpers/InputHelper.h"
 
 #ifndef __MODE_H__

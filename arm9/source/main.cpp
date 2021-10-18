@@ -4,13 +4,11 @@
 #include <fat.h>
 #include "System/GameBase.h"
 #include "System/GameClock.h"
-#include "Libraries/nitrofs.h"
+#include <filesystem.h>
 
 #include "System/TextManager.h"
 
 #include "Libraries/gfxconsole.h"
-
-#include "exception.c"
 
 int getFreeRAM();
 
@@ -23,8 +21,7 @@ int main()
 {
 	powerOn(POWER_ALL);
 	lcdMainOnBottom();
-	//defaultExceptionHandler();
-	setExceptionHandler(customHandler);
+	defaultExceptionHandler();
 	
 	TextManager::Init();
 	
