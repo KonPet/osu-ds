@@ -16,7 +16,7 @@ Beatmap::Beatmap(const char* filename, const char* basedir)
 		char id[4] = { r.ReadInt8(), r.ReadInt8(), r.ReadInt8(), 0 };
 		if (strcmp(id, "ODS") == 0)
 		{
-			u8 odsver = r.ReadInt8();
+			//u8 odsver = r.ReadInt8();
 			
 			mTitle = r.ReadString();
 			mArtist = r.ReadString();
@@ -47,7 +47,7 @@ void Beatmap::Initialize()
 		//skip header
 		mReader->Skip(3);
 		
-		u8 odsver = mReader->ReadInt8();
+		//u8 odsver = mReader->ReadInt8();
 		
 		mTitle = mReader->ReadString();
 		mArtist = mReader->ReadString();
