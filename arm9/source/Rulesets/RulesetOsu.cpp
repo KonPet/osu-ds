@@ -11,7 +11,7 @@ void RulesetOsu::IncreaseScore(ScoreType score, bool forceNoCombo, bool forceNoA
 {
 	s32 now = GameClock::Clock().Time();
 	
-	TextureType tex;
+	TextureType tex {};
 	float hpIncrease;
 	
 	switch (score)

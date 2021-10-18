@@ -151,7 +151,7 @@ void AudioManager::MusicBuffer()
 	mChannel = soundPlaySample(mBuffer, SoundFormat_8Bit, SIZE*2, 22050, 127, 64, true, 0); //true indicates loop
 	
 	//TIMER_FREQ_1024(x) doesn't give required result
-	mTimerData = -(((u32)(0x2000000*(SIZE/22050.0)))>>10);
+	mTimerData = (u16) -(((u32)(0x2000000*(SIZE/22050.0)))>>10);
 	
 	TIMER0_DATA = mTimerData;
 	TIMER0_CR = TIMER_ENABLE | TIMER_IRQ_REQ | TIMER_DIV_1024;

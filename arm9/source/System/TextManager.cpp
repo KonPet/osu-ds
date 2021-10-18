@@ -122,7 +122,7 @@ void TextManager::PrintLocate(int x, int y, DrawOrigin origin, const char* forma
 		tmp = lines[i];
 		for (int j=0; tmp[j] != '\0'; j++)
 		{
-			current += mConsole->font[mConsole->curFont]->Ltrs[tmp[j]]->bShift;
+			current += mConsole->font[mConsole->curFont]->Ltrs[(int) tmp[j]]->bShift;
 		}
 		
 		if (current > width)
